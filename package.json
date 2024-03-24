@@ -18,6 +18,7 @@
   },
   "homepage": "https://github.com/arjun118/Super-market-automation-system#readme",
   "dependencies": {
+    "barcode-scan-js": "^0.0.8",
     "bootstrap-icons": "^1.10.3",
     "connect-flash": "^0.1.1",
     "ejs": "^3.1.9",
