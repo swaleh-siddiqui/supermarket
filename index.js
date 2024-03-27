@@ -65,7 +65,6 @@ app.get("/", (req, res) => {
   res.render("index");
 });
 
-
 // authentications
 
 app.get("/login", (req, res) => {
@@ -140,7 +139,7 @@ app.get("/makeuser", async (req, res) => {
     username: "manager",
     joining_date: Date.now()
   });
-  const newuser = await User.register(user, "manager");
+  const newuser = await User.register(user, "admin");
   res.send(newuser);
 });
 app.get("/additem", async (req, res) => {

@@ -3,28 +3,6 @@
 
 <div style="margin: auto;">
     <form autocomplete="off" action="/bill" method="POST">
-    <!-- <h2>Customer Details</h2>
-    <table class="table table-bordered table-hover" id="tab_customer">
-        <tbody>
-          <tr>
-            <th class="text-center">Customer Name</th>
-            <td class="text-center">
-                <div class="input-group mb-2 mb-sm-0">
-                    <input type="text" class="form-control" id="customer_name" name="customer_name" placeholder="Enter customer name" required>
-                  </div>
-                </td>        
-          </tr>
-          <tr>
-            <th class="text-center">Customer Contact</th>
-            <td class="text-center">
-            <div class="input-group mb-2 mb-sm-0">
-                <input type="text" class="form-control" id="customer_contact" name="contact" placeholder="Enter contact info" required>
-              </div>
-            </td>
-          </tr>
-        </tbody>
-      </table>
-    <br> -->
     <h2>Item Details</h2>
     <br>
     <div class="row clearfix">
@@ -44,12 +22,40 @@
             <tr id='addr0'>
               <td>1</td>
               <td><input type="text" name='code[]' placeholder='#' class="form-control id" readonly/></td>
-              <td><input type="search" name='product[]'  placeholder='Enter Product Name' class="form-control" oninput="myfunc(this)"  required/>
+              <td><input type="search" name='product[]'  placeholder='Enter Product Name' class="form-control productName" oninput="myfunc(this)"  required/>
+<!-- updating code here -->
+                
+                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalLong">
+                  Scan
+                </button>
+                
+                <!-- Modal -->
+                <div class="modal fade" id="exampleModalLong" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+                  <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLongTitle">Scan Product Barcode</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                          <span aria-hidden="true">&times;</span>
+                        </button>
+                      </div>
+                      <div class="modal-body">
+                      </div>
+                      <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-primary">Add Product</button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+<!-- updated code ends -->
                 <ul class="dropdownitems" id="allItems0">
                     <%for (var i=0;i<items.length;i++){%>
                         <li style="text-align: left;" value="<%=items[i]._id%>" onclick="putitem(this,<%=JSON.stringify(items[i])%>)"><a href="#"><%=items[i].item_name%></a></li>
                     <%}%>
-                </ul></td>
+                </ul>
+              </td>
               <td><input type="number" name='qty[]' value="0" max="0" placeholder='Enter Qty' class="form-control qty" step="1" min="0"/></td>
               <td><input type="number" name='price[]' placeholder='Unit Price' class="form-control price" readonly/></td>
               <td><input type="number" value="0" name='total[]' placeholder='0.00' class="form-control total" readonly/></td>
@@ -216,4 +222,65 @@ function putitem(y,i)
     input.children[4].children[0].value=i.unit_price
 
 }
+// the code written below is added on 27/3/24
+$('#exampleModalLong').on('shown.bs.modal', function () {
+    Quagga.init({
+        inputStream: {
+            name: "Live",
+            type: "LiveStream",
+            target: document.querySelector('#exampleModalLong .modal-body') 
+        },
+        decoder: {
+            readers: ["code_128_reader"] 
+        },
+        locate: true, 
+        area: { 
+            top: "20%", 
+            right: "20%",
+            left: "20%",
+            bottom: "20%"
+        },
+    }, function (err) {
+        if (err) {
+            console.log(err);
+            $('#exampleModalLong .modal-body').html('<p>Error initializing camera. Check permissions, lighting, and try a different barcode.</p>'); 
+            return;
+        }
+        console.log("Initialization finished. Ready to start");
+        Quagga.start();
+    });
+
+    // Replace '.form-control.id' with the selector for your target input field
+    Quagga.onDetected(function (data) { 
+        const code = data.codeResult.code;
+
+        // Populate the input field with the scanned code
+        $('.form-control.productName').val(code);
+        // const matchingItem = items.find(item => item.item_code === code); 
+        // Stop the scanner 
+        Quagga.stop(); 
+
+        // Close the modal
+        $('#exampleModalLong').modal('hide');  
+
+        // You might want to trigger your 'calc' function here if needed
+        calc();
+    });
+});
   </script>
+
+<style>
+  #exampleModalLong .modal-body {
+  position: relative; /* Make the modal-body a positioning context */
+}
+
+#exampleModalLong .modal-body video {
+  width: 100%;   
+  max-height: 300px; 
+  object-fit: cover; 
+  position: absolute; /* Position the video absolutely */
+  top: 50%;   /* Center it vertically */
+  left: 50%;  /* Center it horizontally */
+  transform: translate(-50%, -50%); /* Adjust positioning for centering */
+}
+</style>
