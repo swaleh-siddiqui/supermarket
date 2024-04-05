@@ -230,6 +230,10 @@ app.post("/bill", isLoggedIn, async (req, res) => {
   }
   // return res.send(req.body)
   var bill = req.body;
+
+  console.log("----------------------------------------");
+  console.log(bill);
+  console.log("----------------------------------------");
   // console.log(bill);
   const date = new Date();
   bill.date = date;
