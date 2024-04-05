@@ -35,6 +35,18 @@
   }
 </script>
 
+<style>
+  .search{
+    background: transparent !important;
+    border: none !important;
+    border-bottom: 2px solid teal !important;
+    width: 30% !important;
+  }
+  td{
+    
+  }
+</style>
+
 
 <div class="text-center" style="margin: auto;" >
     <h1>Inventory</h1>
@@ -45,9 +57,13 @@
     </button>
     <br><br>
     <%}%>
-    <input class="form-control border border-primary" id="myInput" type="text" placeholder="Search..">
+    <div class="d-flex" style="align-items: flex-end; justify-content: flex-start;">
+      <label for="myInput" style="font-size: 1.2rem;" >Search</label>
+      <input class="search form-control border border-primary" id="myInput" type="text" placeholder="Search..">
+    </div>
+    
     <br><br>
-    <table class="table table-striped table table-hover table-bordered table-sm">
+    <table style="color: white;" class=" table table-hover table-sm">
         <thead>
           <tr>
           <th>Product Code</th>
@@ -67,7 +83,7 @@
               <td><%= item.unit_price %></td>
               <td><%= item.quantity %></td>
               <td>
-                <button type="button" class="btn btn-info" data-toggle="modal" data-target="#ex1" onclick="fun(<%=JSON.stringify(item)%>,<%=JSON.stringify(currentUser.user_type)%>);">
+                <button class="btn btn-success my-2 py-0" data-toggle="modal" data-target="#ex1" onclick="fun(<%=JSON.stringify(item)%>,<%=JSON.stringify(currentUser.user_type)%>);">
                     Edit
                 </button>
               </td>
@@ -78,7 +94,7 @@
       
 
 <!-- Update Modal -->
-      <div class="modal fade" id="ex1" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+      <div style="color: black;" class="modal fade" id="ex1" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered" role="document">
           <div class="modal-content">
 
@@ -111,7 +127,7 @@
       </div>
 
 <!-- add item modal -->
-      <div class="modal fade" id="addItem" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+      <div style="color: black;" class="modal fade" id="addItem" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered mw-100 w-75" role="document">
           <div class="modal-content">
 

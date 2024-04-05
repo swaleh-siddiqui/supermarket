@@ -30,6 +30,7 @@ const app = express();
 app.engine("ejs", ejsMate);
 app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "views"));
+app.use(express.static(path.join(__dirname, "public")));
 
 app.use(express.urlencoded({ extended: true }));
 
@@ -237,10 +238,12 @@ app.post("/bill", isLoggedIn, async (req, res) => {
 
   for (let i = 0; i < bill.code.length; i++) {
     var q = await Item.find({ item_code: bill.code[i] });
+    console.log("object = ",q[0]);
     const x = await Item.findOneAndUpdate(
       { item_code: bill.code[i] },
       { quantity: q[0].quantity - bill.qty[i] }
     );
+
     bill_items.push({
       item_code: bill.code[i],
       name: q[0].item_name,
