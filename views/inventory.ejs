@@ -13,7 +13,7 @@
 
   function fun(id,user_type){
     console.log(user_type)
-    if (user_type == "Staff"){
+    if (user_type == "clerk"){
       u = document.getElementById("ci4");
       u.style.display="none"
       u = document.getElementById("ci44");
@@ -63,7 +63,7 @@
     </div>
     
     <br><br>
-    <table style="color: white;" class=" table table-hover table-sm">
+    <table style="color: white;" class=" table table-sm">
         <thead>
           <tr>
           <th>Product Code</th>
@@ -108,10 +108,10 @@
 
             <div class="modal-body">
                 <input type="text" id="ci1"  name="i1"class="form-control" hidden ><br>
-
+                <% if (currentUser.user_type == "Manager"){%>
                   <label id="ci44"  class="col-sm-2 col-form-label" for="ai3">MRP</label>
                   <input type="number" id="ci4"  min="0" name="i3" ><br>
-
+                <% } %>
                 <label id="ci55" class="col-sm-2 col-form-label" for="ai4">Quantity</label>
                 <input type="number" id="ci5" min="0" name="i4" ><br>
             </div>

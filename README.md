@@ -65,23 +65,4 @@ Contributions are welcome! If you'd like to contribute to this project, please f
 3. Make your changes and commit them.
 4. Push your changes to your fork.
 5. Submit a pull request explaining your changes.
-## Screenshoot
-- **Manager:**
-   - **Stats**
-    - <img width="947" alt="image" src="https://github.com/aws-coder77/Supermarket-Automation-System/assets/109901506/83a701d4-29be-4a76-add8-9a7141aaa941">
-<img width="943" alt="image" src="https://github.com/aws-coder77/Supermarket-Automation-System/assets/109901506/2e8bd6f1-0409-4990-8ebc-c1ec3876b130">
-
-   - **Inventry**
-      ![image](https://github.com/aws-coder77/Supermarket-Automation-System/assets/109901506/7ba61be0-df4f-4d32-baef-32a47ca03114)
-
-
-
-- **Sales Clerk:**
-<img width="942" alt="image" src="https://github.com/aws-coder77/Supermarket-Automation-System/assets/109901506/27c73ba9-6a86-49ac-800e-93a9dded1736">
-
-- **Supermarket Staff:**
-   <img width="957" alt="image" src="https://github.com/aws-coder77/Supermarket-Automation-System/assets/109901506/6482c5f0-bfdf-4368-b161-f45c0b5e7d95">
-
-
-
 

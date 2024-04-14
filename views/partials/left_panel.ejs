@@ -32,9 +32,9 @@
         <a href="/stat" class="btn list-group-item list-group-item-actiom" id="profile">Sales Statistics</a>
         <a href="/register" class="btn list-group-item list-group-item-actiom" id="addemployee">Add Staff</a>
         <% } %>
-        <% if (currentUser.user_type != "Clerk"){ %>
+        
         <a href="/inventory" class="btn list-group-item list-group-item-actiom" id="employeedetails">Inventory</a>
-        <% } %>
+        
         <% if (currentUser.user_type == "Clerk"){ %>
         <a href="/bill" class="btn list-group-item list-group-item-actiom" id="password">Generate bills</a>
         <% } %>
