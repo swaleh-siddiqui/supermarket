@@ -220,7 +220,9 @@ app.get("/bill", isLoggedIn, async (req, res) => {
   //     res.redirect('/welcome');
   // }
   const items = await Item.find({});
-  res.render("bill", { items });
+  res.locals.items = items;
+  console.log(items);
+  res.render("bill");
 });
 
 app.post("/bill", isLoggedIn, async (req, res) => {
@@ -323,5 +325,5 @@ app.post("/updateItems", async (req, res) => {
 });
 
 app.listen(8080, () => {
-  console.log("Listening on port 4000!!..");
+  console.log("Listening on port 8080!!..");
 });

@@ -81,7 +81,7 @@
               <td><input type="number" value="0" name='total[]' placeholder='0.00' class="form-control total" readonly/></td>
               <td>
                 <div class="bt" style="display: flex; align-items: center; justify-content: center; ">
-                  <button type="button" class="btn btn-success btn-sm" " data-toggle="modal" data-target="#exampleModalLong">
+                  <button type="button" class="btn btn-success btn-sm" " data-toggle="modal" data-target="#exampleModalLong" onclick="openModalWithRow(this)">
                     Scan
                   </button>
                 </div>
@@ -183,6 +183,14 @@
   else{
     list.style.display = "list-item";
   }
+</script>
+<script>
+  function openModalWithRow(row) {
+    // Pass the row reference to the modal
+    $('#exampleModalLong').data('currentRow', row);
+    // Open the modal
+    $('#exampleModalLong').modal('show');
+}
 </script>
 
   <script>
@@ -291,8 +299,16 @@ function putitem(y,i)
     input.children[4].children[0].value=i.unit_price
 
 }
-// the code written below is added on 27/3/24
-$('#exampleModalLong').on('shown.bs.modal', function () {
+
+$('#exampleModalLong').on('hidden.bs.modal', function (event) {
+    // Stop the Quagga scanner when the modal is closed
+    Quagga.stop();
+});
+
+$('#exampleModalLong').on('shown.bs.modal', function (event) {
+    var currentRow = $(this).data('currentRow');
+    x=currentRow.parentElement.parentElement.parentElement.id;
+    x=x.substring(4);
     Quagga.init({
         inputStream: {
             name: "Live",
@@ -322,22 +338,35 @@ $('#exampleModalLong').on('shown.bs.modal', function () {
     // Replace '.form-control.id' with the selector for your target input field
     Quagga.onDetected(function (data) { 
         const code = data.codeResult.code;
+        const itemcode = code;
 
-        // Populate the input field with the scanned code
-        $('.form-control.productName').val(code);
+
+        var itemsArray=<%- JSON.stringify(items) %>;
+        var selectedItem = itemsArray.find(item => item.item_code == itemcode);
+        if (selectedItem) {
+        input=document.getElementById("addr"+x);
+        input.children[1].children[0].value=selectedItem.item_code;
+        input.children[2].children[0].value=selectedItem.item_name;
+        input.children[3].children[0].max=selectedItem.quantity;
+        input.children[4].children[0].value=selectedItem.unit_price;
         
-
-        // const matchingItem = items.find(item => item.item_code === code); 
         // Stop the scanner 
         Quagga.stop(); 
 
         // Close the modal
         $('#exampleModalLong').modal('hide');  
-
+        
         // You might want to trigger your 'calc' function here if needed
         calc();
+      } else {
+        // Display error message here
+        $('#exampleModalLong').modal('hide');  
+        alert("Item with code " + itemcode + " not found.");
+    }
     });
 });
+
+
   </script>
 
 <style>
