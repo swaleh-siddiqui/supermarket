@@ -33,7 +33,12 @@
   <!-- Custom styles -->
   <style>
   
-
+    body{
+      background: url("/_bg.jpg") !important;
+      background-size: contain !important;
+      color: white;
+      height: 100vh !important;
+    }
     .decision-container {
       text-align: center;
       margin-top: 100px;
@@ -44,15 +49,22 @@
     }
 
     .alert-primary {
-      background-color: rgba(255, 255, 255, 0.8); /* Semi-transparent white background for better readability */
-      color: #000;
+      background: transparent ; /* Semi-transparent white background for better readability */
+      color: white;
     }
     .bg-light {
-      background-color: rgba(255, 255, 255, 0.8);
+      background: transparent;
       color: #218838;
       border-radius: 20px;
       padding: 20px;
       margin-top: 20px;
+    }
+    #about{
+      background: transparent !important;
+      color: #218838!important;
+    }
+    #about p{
+      color: white !important;
     }
   </style>
 </head>
@@ -60,21 +72,23 @@
 
   <div class="container decision-container">
     <h1 class="mb-4">Supermarket Automation System</h1>
+    <br>
 
     <div class="alert alert-primary" role="alert">
       <strong>Welcome!</strong> Please select your role:
     </div>
+    <br>
 
     <a href="/login" class="btn btn-success btn-lg decision-button">Manager</a>
     <a href="/login" class="btn btn-info btn-lg decision-button">Clerk</a>
   </div>
-
+  <br>
 
   <section id="about" class="bg-light container">
     <div class="row">
       <div class="col-lg-12 text-center">
         <h2 class="section-heading text-uppercase">About Us</h2>
-        <p class="text-muted">Supermarket Automation System is dedicated to providing innovative solutions to enhance the efficiency and productivity of supermarkets. With a focus on automation and technology, we strive to revolutionize the way supermarkets operate in the modern era.</p>
+        <p class="text">Supermarket Automation System is dedicated to providing innovative solutions to enhance the efficiency and productivity of supermarkets. With a focus on automation and technology, we strive to revolutionize the way supermarkets operate in the modern era.</p>
       </div>
     </div>
   </section>
