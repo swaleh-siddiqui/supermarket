@@ -1,8 +1,9 @@
+// bill schema
 const mongoose=require('mongoose')
 
 const Schema= mongoose.Schema
 const Item= require('./item')
-
+ 
 const billSchema= new Schema({
     // customer_name:{
     //     type:String,
